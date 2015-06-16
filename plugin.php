@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:       GV Addon: Filter Recent Entries
+ * Plugin Name:       GravityView Mod: Filter Recent Entries
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/2548
  * Description:       Filter Recent Entries
  * Version:           0.1.0
- * Author:            Gustavo Bordoni
- * Author URI:        http://bordoni.me/
+ * Author:            GravityView
+ * Author URI:        https://gravityview.co
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
