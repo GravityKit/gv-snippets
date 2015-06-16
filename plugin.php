@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Search Mode "All"
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2643
+ * Description:       Change the GravityView search mode to use "All" instead of "Any"
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,22 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_2643 {
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	public static function add_hooks(){
+		add_filter( 'gravityview/search/mode', 'gv_my_modify_search_mode', 10, 1 );
 	}
 
-	public function __construct(){
-
+	/**
+	 * Force searches to match all parameters, not any.
+	 *
+	 * @link http://docs.gravityview.co/article/55-how-do-i-modify-the-search-mode
+	 * @param string $mode 'any' or 'all'
+	 */
+	function gv_my_modify_search_mode ( $mode ) {
+		return 'all'; // by default is 'any'
 	}
+
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_2643', 'add_hooks' ), 15 );
