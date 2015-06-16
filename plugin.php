@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:       GV Addon: __description__
+ * Plugin Name:       GravityView Mod: __description__
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
  * Description:       __description__
- * Version:           0.1.0
- * Author:            __author__
- * Author URI:        __author_url__
+ * Version:           1.0
+ * Author:            GravityView
+ * Author URI:        https://gravityview.co
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -15,8 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet_ID {
-	public static $ID = ID;
+class GV_Snippet___ID__ {
+
+	public static $ID = __ID__;
 
 	private static $_instance = null;
 
@@ -32,4 +33,5 @@ class GV_Snippet_ID {
 
 	}
 }
-add_action( 'plugins_loaded', array( 'GV_Snippet_ID', 'instance' ), 15 );
+
+add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
