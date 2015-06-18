@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod - Modify Search Labels (Requires Edits)
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2665
+ * Description:       Change the search labels for inputs in the GravityView Search Widget
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,39 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_2665 {
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	public static function add_hooks(){
+		add_filter( 'gravityview_search_field_label', array( 'GV_Snippet_2665', 'modify_search_field_label' ), 10, 2 );
 	}
 
-	public function __construct(){
+	/**
+	 * Modify the label for a search field
+	 *
+	 * @param string $label Existing label text
+	 * @param array $form_field Gravity Forms field array, as returned by `GFFormsModel::get_field()`
+	 *
+	 * @return string Possibly modified label
+	 */
+	public static function modify_search_field_label( $label, $form_field = array() ) {
 
+		// Return the default label name by default
+		$return = $label;
+
+		// Then override based on the value of the label.
+		switch ( $label ) {
+			case 'Company Name':
+				$return = 'Company';
+				break;
+
+			// Add additional cases here, like:
+			case 'First Name':
+				$return = 'First';
+				break; // Don't forget "break;" after each case
+		}
+
+		return $return;
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_2665', 'add_hooks' ), 15 );
