@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Use DataTables "Compact" Style
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2677
+ * Description:       Use DataTables "Compact" style. <a href="https://datatables.net/examples/styling/compact.html">See example here</a>.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,8 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
-
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+function gravityview_datatables_table_class_compact( $class = 'display dataTables' ) {
+	return 'display compact dataTables';
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_filter( 'gravityview_datatables_table_class', 'gravityview_datatables_table_class_compact' );
