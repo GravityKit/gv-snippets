@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod - Modify Search Labels (Requires Edits)
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2665
- * Description:       Change the search labels for inputs in the GravityView Search Widget
+ * Plugin Name:       GravityView Mod - Modify "Search Entries" Label
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2730
+ * Description:       Change "Search Entries" to "Search Directory" in the GravityView Search Widget
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,10 +15,10 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet_2665 {
+class GV_Snippet_2730 {
 
 	public static function add_hooks(){
-		add_filter( 'gravityview_search_field_label', array( 'GV_Snippet_2665', 'modify_search_field_label' ), 10, 2 );
+		add_filter( 'gravityview_search_field_label', array( 'GV_Snippet_2730', 'modify_search_field_label' ), 10, 2 );
 	}
 
 	/**
@@ -36,18 +36,13 @@ class GV_Snippet_2665 {
 
 		// Then override based on the value of the label.
 		switch ( $label ) {
-			case 'Company Name':
-				$return = 'Company';
+			case 'Search Entries':
+				$return = 'Search Directory';
 				break;
-
-			// Add additional cases here, like:
-			case 'First Name':
-				$return = 'First';
-				break; // Don't forget "break;" after each case
 		}
 
 		return $return;
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet_2665', 'add_hooks' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_2730', 'add_hooks' ), 15 );
