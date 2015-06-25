@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Translate Text
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2730-modify-gettext
+ * Description:       Translate GravityView text that doesn't already have a filter
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,46 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_2730_2 {
 
-	public static $ID = __ID__;
+	/**
+	 * Translate GravityView text that doesn't already have a filter
+	 *
+	 * Thanks to WooCommerce for the jump start: https://support.woothemes.com/hc/en-us/articles/203105817
+	 *
+	 * @param string $translated Text as already translated
+	 * @param string $text Original text
+	 * @param string $domain Translated plugin textdomain (for GravityView, it's "gravityview")
+	 *
+	 * @return string
+	 */
+	public static function translate( $translated, $text, $domain = '' ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
+		// Only translate GravityView text
+		if( 'gravityview' !== $domain ) {
+			return $translated;
 		}
 
-		return self::$_instance;
+		// By default, return the original translation
+		$return = $translated;
+
+		// If the text matches any of the cases below, it will be replaced by your new text
+		switch( $text ) {
+
+			// Change the "Search" button to "Enquiry"
+			case 'Search':
+				$return = 'Enquiry';
+				break;
+
+			// Modify the example below to add another
+			# case 'Example':
+			#	$return = 'Another example';
+			#	break;
+		}
+
+		return $return;
 	}
 
-	public function __construct(){
-
-	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_filter('gettext', array( 'GV_Snippet_2730_2', 'translate' ), 10, 3 );
