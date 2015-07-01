@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Disable assigning the new user to the entry
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2777-disable-user-assignment
+ * Description:       When an user is created using the User Registration add-on, Disable assigning the new user to the entry
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,9 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_2777 {
 
-	public static $ID = __ID__;
+	public static $ID = 2777;
 
 	private static $_instance = null;
 
@@ -30,8 +30,8 @@ class GV_Snippet___ID__ {
 	}
 
 	public function __construct(){
-
+		add_filter( 'gravityview_assign_new_user_to_entry', '__return_false' );
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_2777', 'instance' ), 15 );
