@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: Make Date Range Search inclusive
+ * Plugin Name:       GravityView Mod: Date Search include limits
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/2703-date-search-include-limits
  * Description:       When using date range search make sure the date limits are included
  * Version:           1.0
