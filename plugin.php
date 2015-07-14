@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
+ * Plugin Name:       GravityView Ratings & Reviews Mod: Remove Title and Rating fields
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Description:       Remove Title and Rating fields on Ratings & Reviews extension
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,9 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_2865 {
 
-	public static $ID = __ID__;
+	public static $ID = 2865;
 
 	private static $_instance = null;
 
@@ -31,7 +31,11 @@ class GV_Snippet___ID__ {
 
 	public function __construct(){
 
+		// Remove Title and Rating fields on Ratings & Reviews extension
+		add_filter( 'comment_form_field_gv_review_title', '__return_empty_string' );
+		add_filter( 'comment_form_field_gv_review_rate', '__return_empty_string' );
+
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_2865', 'instance' ), 15 );
