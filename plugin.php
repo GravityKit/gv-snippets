@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Ratings & Reviews Mod: Remove Title and Rating fields
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/2865-remove-title-ratings-fields
  * Description:       Remove Title and Rating fields on Ratings & Reviews extension
  * Version:           1.0
  * Author:            GravityView
