@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ){
 class GV_Snippet_2643 {
 
 	public static function add_hooks(){
-		add_filter( 'gravityview/search/mode', array( $this, 'gv_my_modify_search_mode' ), 10, 1 );
+		add_filter( 'gravityview/search/mode', array( 'GV_Snippet_2643', 'gv_my_modify_search_mode' ), 10, 1 );
 	}
 
 	/**
