@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Search Mode "All"
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2643
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/2643-search-mode-all
  * Description:       Change the GravityView search mode to use "All" instead of "Any"
  * Version:           1.0
  * Author:            GravityView
@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ){
 class GV_Snippet_2643 {
 
 	public static function add_hooks(){
-		add_filter( 'gravityview/search/mode', 'gv_my_modify_search_mode', 10, 1 );
+		add_filter( 'gravityview/search/mode', array( $this, 'gv_my_modify_search_mode' ), 10, 1 );
 	}
 
 	/**
