@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Force the "Gender" field to match exactly
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/58
+ * Description:       Change the search operator for View #58 to match field ID #20 exactly.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,17 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview_get_entries_58', 'gravityview_modify_search_criteria_for_view_58' );
 
-	public static $ID = __ID__;
+function gravityview_modify_search_criteria_for_view_58( $parameters, $args = array(), $form_id = 0 ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
+	if( !empty( $parameters['search_criteria']['field_filters'] ) ) {
+		foreach ( $parameters['search_criteria']['field_filters'] as &$filter ) {
+			if ( 20 === (int)$filter['key'] ) {
+				$filter['operator'] = 'is';
+			}
 		}
-
-		return self::$_instance;
 	}
 
-	public function __construct(){
-
-	}
+	return $parameters;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
