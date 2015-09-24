@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Parse shortcode on post custom field "sections_X_shortcode"
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon
+ * Description:       Force GravityView to parse post custom field "sections_X_shortcode" to load the shortcode
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,9 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_3348 {
 
-	public static $ID = __ID__;
+	public static $ID = 3348;
 
 	private static $_instance = null;
 
@@ -29,9 +29,15 @@ class GV_Snippet___ID__ {
 		return self::$_instance;
 	}
 
-	public function __construct(){
-
+	public function __construct() {
+		add_filter( 'gravityview/data/parse/meta_keys', array( $this, 'add_meta_keys' ), 10, 1 );
 	}
+
+	function add_meta_keys( $keys ) {
+		return array( 'sections_0_shortcode', 'sections_1_shortcode', 'sections_2_shortcode' );
+	}
+
+
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_3348', 'instance' ), 15 );
