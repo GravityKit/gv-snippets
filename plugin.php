@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Parse shortcode on post custom field "sections_X_shortcode"
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/parse-shortcode-custom-fields
  * Description:       Force GravityView to parse post custom field "sections_X_shortcode" to load the shortcode
  * Version:           1.0
  * Author:            GravityView
