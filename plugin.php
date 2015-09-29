@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Filter recent entries based on the entry created_by user
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/3472
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/3472-filter-recent-entries
  * Description:       Using the Recent Entries widget, filters the Member History to display only the user's entries
  * Version:           1.0
  * Author:            GravityView
