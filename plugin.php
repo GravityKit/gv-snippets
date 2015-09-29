@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Custom Checkbox "Tick"
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/3443-checkbox-tick
+ * Description:       Replace checkbox tick icon with "Approved" when the field label is "APV".
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,29 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * @filter `gravityview_field_tick` Change the output for a checkbox "check" symbol. Default is dashicons-yes icon
+ * @see https://developer.wordpress.org/resource/dashicons/#yes
+ */
+add_filter( 'gravityview_field_tick', 'replace_gravityview_field_tick', 10, 3 );
 
-	public static $ID = __ID__;
+/**
+ * If the column is named APV, return "Approved" instead of a checkbox
+ *
+ * @param string $output HTML span with `dashicons dashicons-yes` class
+ * @param array $entry Gravity Forms entry array
+ * @param array $field GravityView field array
+ *
+ * @return mixed
+ */
+function replace_gravityview_field_tick( $html, $entry, $field ) {
 
-	private static $_instance = null;
+	$label = GravityView_View::getInstance()->getCurrentFieldSetting('label');
+	$custom_label = GravityView_View::getInstance()->getCurrentFieldSetting('custom_label');
 
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if( in_array( 'APV', array( $label, $custom_label ) ) ) {
+		$html = 'Approved';
 	}
 
-	public function __construct(){
-
-	}
+	return $html;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
