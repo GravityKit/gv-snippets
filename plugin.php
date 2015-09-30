@@ -37,6 +37,7 @@ class GV_Snippet_3472 {
 	 * Filter the recent entries widget results to just show the work history entries related with the current user entry
 	 * Using the following values:
 	 *  - Work History View ID #262
+	 *  - Work History form Member Name field #6 (contains the user ID)
 	 *
 	 */
 	function filter_work_history(  $criteria, $instance, $form_id ) {
@@ -52,7 +53,7 @@ class GV_Snippet_3472 {
 		if( empty( $entry['created_by'] ) ) {
 			return $criteria;
 		}
-		$criteria['search_criteria']['field_filters'][] = array( 'key' => 'created_by', 'value' =>  $entry['created_by'] );
+		$criteria['search_criteria']['field_filters'][] = array( 'key' => '6', 'value' =>  $entry['created_by'] );
 
 		return $criteria;
 	}
