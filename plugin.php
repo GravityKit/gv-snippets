@@ -53,7 +53,7 @@ class GV_Snippet_3472 {
 		if( empty( $entry['created_by'] ) ) {
 			return $criteria;
 		}
-		$criteria['search_criteria']['field_filters'][] = array( 'key' => '6', 'value' =>  $entry['created_by'] );
+		$criteria['search_criteria']['field_filters'][] = array( 'key' => '6', 'operator' => 'is',  'value' =>  $entry['created_by'] );
 
 		return $criteria;
 	}
