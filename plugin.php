@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Prevent single entry redirection on front-page
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/fix/3509-prevent-frontpage-redirect
  * Description:       Prevent single entry redirection on front-page when View is embedded on page set as static front-page
  * Version:           1.0
  * Author:            GravityView
