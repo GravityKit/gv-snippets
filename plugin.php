@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Prevent Automatic Paragraphs in Zones
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4108-remove-wpautop
+ * Description:       Prevent the `wpautop()` function from being applied to View Zones
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,17 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview/field_output/args', 'gv_unset_wpautop_field_output_args', 10, 2 );
 
-	public static $ID = __ID__;
+/**
+ * Prevent `wpautop()` from being applied to View Zones
+ *
+ * @param array $args Associative array; `field` and `form` is required.
+ * @param array $passed_args Original associative array with field data. `field` and `form` are required.
+ */
+function gv_unset_wpautop_field_output_args( $args = array(), $passed_args = array() ) {
 
-	private static $_instance = null;
+	$args['wpautop'] = false;
 
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+	return $args;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
