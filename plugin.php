@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: Add Entry Notes to View
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/4182
- * Description:       Adds entry notes to the View
+ * Plugin Name:       GravityView Mod: List Entry Notes in View
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4182-list-entry-notes
+ * Description:       List entry notes in a View, using a Custom Content Field
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
