@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Don't Encode Field Output
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/4321-unescape-output
+ * Description:       Removes HTML encoding added to field output. Make sure you trust the content of your entries; this allows Javascript to be run.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview/field_output/html', 'gravityview_field_output_wp_specialchars_decode' );
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+function gravityview_field_output_wp_specialchars_decode( $html = '' ) {
+	$html = wp_specialchars_decode( $html, ENT_QUOTES );
+	return $html;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
