@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Maps Mod: Remove Links From Map Markers
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/4423-remove-marker-url
+ * Description:       Remove URL links from GravityView Map markers.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,22 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview/maps/render/options', 'gravityview_maps_remove_urls_from_markers' );
 
-	public static $ID = __ID__;
+/**
+ * Remove URL links from map markers
+ *
+ * @param array $map_options
+ *
+ * @return array Modified map options with # for links
+ */
+function gravityview_maps_remove_urls_from_markers( $map_options ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
+	if( ! empty( $map_options ) && ! empty( $map_options['markers_info'] ) ) {
+		foreach ( $map_options['markers_info'] as $key => $marker ) {
+			$map_options['markers_info'][ $key ]['url'] = '#';
 		}
-
-		return self::$_instance;
 	}
 
-	public function __construct(){
-
-	}
+	return $map_options;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
