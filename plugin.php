@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Add :urlencode Merge Tag Modifier
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4395-urlencode-modifier
+ * Description:       Add support for a new modifier <code>:urlencode</code> inside Merge Tags. Use like this: <code>{Field Name:ID:urlencode}</code>.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,31 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gform_merge_tag_filter', 'gravityview_merge_tag_filter_urlencode_modifier', 10, 5 );
 
-	public static $ID = __ID__;
+/**
+ * Add support for URL-encoding field values in Merge Tag for all fields
+ *
+ * @see RGFormsModel::get_lead_field_value
+ * @see GFCommon::replace_field_variable()
+ * @uses wp_specialchars_decode()
+ *
+ * @param string $value Replacement value that Gravity Forms was going to return
+ * @param string|int $input_id The ID of the input being rendered
+ * @param string $modifier Text after `:` in a Merge Tag: `{Field Name:ID:modifier}`
+ * @param GF_Field $field Current field being replaced as a Merge Tag
+ * @param mixed $raw_value Value from RGFormsModel::get_lead_field_value()
+ *
+ * @return string If `urlencode` modifier exists, urlencoded value. Otherwise, existing value.
+ */
+function gravityview_merge_tag_filter_urlencode_modifier( $value = '', $input_id = '', $modifier = '', $field = null, $raw_value = '' ) {
 
-	private static $_instance = null;
+	$return = $value;
 
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if( 'urlencode' === $modifier ) {
+		$return = wp_specialchars_decode( $return );
+		$return = urlencode( $return );
 	}
 
-	public function __construct(){
-
-	}
+	return $return;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
