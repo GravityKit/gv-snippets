@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Disable Conditional Logic Support in Edit Entry (Form #6)
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4463-disable-conditional-logic
+ * Description:       Allow fields that would normally be hidden in Conditional Logic to display in Edit Entry, based on the Edit Entry configuration screen settings. This plugin will only modify this setting for Form #6.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,19 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview/edit_entry/conditional_logic', 'gravityview_remove_conditional_logic_from_form_six', 10, 2 );
 
-	public static $ID = __ID__;
+/**
+ * Remove the conditional logic rules from the form button and the form fields if the form is #6
+ * @param bool $use_conditional_logic True: Gravity Forms will show/hide fields just like in the original form; False: conditional logic will be disabled and fields will be shown based on configuration. Default: true
+ * @param array $form Gravity Forms form
+ * @return bool Updated conditional logic
+ */
+function gravityview_remove_conditional_logic_from_form_six( $use_conditional_logic, $form ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if( 6 === intval( $form['id'] ) ) {
+		$use_conditional_logic = false;
 	}
 
-	public function __construct(){
-
-	}
+	return $use_conditional_logic;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
