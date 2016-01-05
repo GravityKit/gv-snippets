@@ -1,37 +1,25 @@
 <?php
-/**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
- * Version:           1.0
- * Author:            GravityView
- * Author URI:        https://gravityview.co
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- */
+/*
+Plugin Name: GravityView - Limit DataTables to 250 Entries
+Plugin URI: http://github.com/gravityview/gv-snippets/tree/addon/4549-datatables-limit-entries
+Description: Remove "All" from the options, and replace it with 250 Entries per screen
+Version: 1.0
+Author: Katz Web Services, Inc.
+Author URI: https://gravityview.co
+*/
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview_datatables_lengthmenu', 'restrict_gravityview_datatables_lengthmenu', 10, 2 );
 
-	public static $ID = __ID__;
+function restrict_gravityview_datatables_lengthmenu( $values ) {
 
-	private static $_instance = null;
+	unset( $values[-1] );
 
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
+	$values[ 250 ] = 250;
 
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+	return $values;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
