@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Approve Entries by Default
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4575-approve-by-default
+ * Description:       When new entries are created in Gravity Forms, add entry approval status. Requires Gravity Forms 1.9.14.26 or newer.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,15 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
-
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+/**
+ * When new entries are created in Gravity Forms, add entry approval status
+ *
+ * @param array $entry Gravity Forms entry array
+ * @param array $form Gravity Forms form array
+ * @return void
+ */
+function gv_post_add_entry_approve_entry( $entry, $form ) {
+	gform_update_meta( $entry['id'], 'is_approved', 'Approved' );
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'gform_post_add_entry', 'gv_post_add_entry_approve_entry', 10, 2 );
