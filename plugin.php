@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Prevent Sorting Field 7 in DataTables
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/issue/4633-prevent-sorting-field-7
+ * Description:       Disable sorting Field 7 in DataTables
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,25 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter( 'gravityview_datatables_js_options', 'gv_dt_prevent_sorting_field_7', 10, 3 );
 
-	public static $ID = __ID__;
+/**
+ * Prevent sorting
+ * @param array $dt_config DataTables JS configuration array
+ * @param int $view_id
+ * @param int $post
+ *
+ * @return array
+ */
+function gv_dt_prevent_sorting_field_7( $dt_config = array(), $view_id = 0, $post = 0) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
+	if( isset( $dt_config['columns'] ) ) {
+		foreach( $dt_config['columns'] as $key => $column ) {
+			if( 'gv_7' === $column['name'] ) {
+				$dt_config['columns'][$key]['orderable'] = false;
+			}
 		}
-
-		return self::$_instance;
 	}
 
-	public function __construct(){
-
-	}
+	return $dt_config;
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
