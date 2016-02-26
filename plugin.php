@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Change Edit Entry Update Button Label
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/
- * Description:       __description__
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/5041-change-edit-entry-buttons-label
+ * Description:       Change the Edit Entry button Update label to Submit
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
