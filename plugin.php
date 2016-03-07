@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Redirect users to the single entry view after updating entry
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/5161-redirect-edit-entry-to-single-entry
  * Description:       Redirect users to the single entry view after updating entry
  * Version:           1.0
  * Author:            GravityView
