@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Redirect users to the single entry view after updating entry
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/
+ * Description:       Redirect users to the single entry view after updating entry
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,9 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_5161 {
 
-	public static $ID = __ID__;
+	public static $ID = 5161;
 
 	private static $_instance = null;
 
@@ -30,8 +30,20 @@ class GV_Snippet___ID__ {
 	}
 
 	public function __construct(){
-
+		add_action( 'gravityview/edit_entry/after_update', 'redirect_after_update', 10, 2  );
 	}
+
+	function redirect_after_update( $form, $entry_id ) {
+		?>
+		<script>
+			jQuery(document).ready( function() {
+				window.location.replace( window.location.href.split('?')[0] );
+			});
+		</script>
+		<?php
+	}
+
+
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_5161', 'instance' ), 15 );
