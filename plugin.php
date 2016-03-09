@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Change the "Entry Updated" link to point to directory instead of the entry
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/5180-modify-updated-entry-link
+ * Description:       Redirect users to the single entry view after updating entry
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,28 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * Change the update entry success message, including the link
+ *
+ * @param $message string The message itself
+ * @param $view_id int View ID
+ * @param $entry array The Gravity Forms entry object
+ * @param $back_link string Url to return to the original entry
+ */
+function gv_snippet_my_update_message( $message, $view_id, $entry, $back_link ) {
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	// This should never happen.
+	if( ! class_exists('GravityView_Post_Types') ) {
+		return $message;
 	}
 
-	public function __construct(){
+	$entry_var = GravityView_Post_Types::get_entry_var_name();
 
-	}
+	$link = str_replace( $entry_var.'/'.$entry['id'].'/', '', $back_link );
+
+	return 'Entry Updated. <a href="'.esc_url($link).'">Return to the list</a>';
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+// If you've already added to your functions.php file, remove that
+remove_filter( 'gravityview/edit_entry/success', 'gv_my_update_message', 10 );
+add_filter( 'gravityview/edit_entry/success', 'gv_snippet_my_update_message', 10, 4 );
