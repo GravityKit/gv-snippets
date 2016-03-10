@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Change "/entry/" to "/item/"
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/5192-rename-endpoint
+ * Description:       Instead of using "/view/entry/{id}/", use "/view/item/{id}/"
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,13 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_filter('gravityview_directory_endpoint', 'gravityview_directory_endpoint_change_to_item');
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+/**
+ * Change the /entry/ URL piece to /item/
+ * @param  string $endpoint Previous endpoint, default: "entry"
+ * @return string           Change the new endpoint to "name"
+ */
+function gravityview_directory_endpoint_change_to_item( $endpoint ) {
+	return 'item';
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
