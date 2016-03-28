@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Decode shortcode brackets on custom content field
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/4425
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/4425-decode-shortcodes
  * Description:       When using a merge tag of a field containing a shortcode on a custom content field, decode the brackets so it process the shortcode correctly
  * Version:           1.0
  * Author:            GravityView
