@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
+ * Plugin Name:       GravityView Mod: Fix unknown issue with get_post_meta
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Description:       Fixes a strange behaviour of the WP function get_post_meta which conflicts with the GravityView plugin
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,9 +15,9 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+class GV_Snippet_5344 {
 
-	public static $ID = __ID__;
+	public static $ID = 5344;
 
 	private static $_instance = null;
 
@@ -30,8 +30,23 @@ class GV_Snippet___ID__ {
 	}
 
 	public function __construct(){
+		add_filter( 'gravityview/configuration/fields', array( $this, 'fix_directory_fields' ), 10, 2 );
+	}
 
+	/**
+	 * Hack to fix a really strange issue with the `get_post_meta` WP core function
+	 * @param $fields
+	 * @param $post_id
+	 *
+	 * @return string
+	 */
+	function fix_directory_fields( $fields, $post_id ) {
+		if( !empty( $fields ) ) {
+			return $fields;
+		}
+		$new_fields = get_post_meta( $post_id, '_gravityview_directory_fields', false );
+		return isset( $new_fields[0] ) ? $new_fields[0] : '';
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'plugins_loaded', array( 'GV_Snippet_5344', 'instance' ), 15 );
