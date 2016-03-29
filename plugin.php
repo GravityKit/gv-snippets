@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Fix unknown issue with get_post_meta
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/5344-fix-get-post-meta
  * Description:       Fixes a strange behaviour of the WP function get_post_meta which conflicts with the GravityView plugin
  * Version:           1.0
  * Author:            GravityView
