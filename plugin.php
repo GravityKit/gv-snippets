@@ -19,18 +19,18 @@ if ( ! defined( 'WPINC' ) ){
  * Mark an entry as unread after it has been edited
  *
  * @param array $form Gravity Forms form array
- * @param string $entry_id Numeric ID of the entry that was updated
+ * @param int $entry_id Numeric ID of the entry that was updated
  *
  * @return void
  */
-function gravityview_set_entry_to_unread_after_edit( $form, $entry_id ) {
+function gravityview_set_entry_to_unread_after_edit( $form = array(), $entry_id = 0 ) {
 
 	$updated = RGFormsModel::update_lead_property( $entry_id, 'is_read', 0 );
 
 	if( false !== $updated ) {
 		do_action( 'gravityview_log_debug', sprintf( '%s: Marked Entry ID #%d unread', __FUNCTION__, $entry_id ) );
 	} else {
-		do_action( 'gravityview_log_error', sprintf( '%s: Failed to marked Entry ID #%d unread', __FUNCTION__, $entry_id ) );
+		do_action( 'gravityview_log_error', sprintf( '%s: Failed to mark Entry ID #%d unread', __FUNCTION__, $entry_id ) );
 	}
 }
 
