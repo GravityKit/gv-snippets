@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Mark Entry Unread After Edit
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/6111-unread-after-edit
+ * Description:       Mark an entry as unread after it has been edited in GravityView
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,23 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * Mark an entry as unread after it has been edited
+ *
+ * @param array $form Gravity Forms form array
+ * @param string $entry_id Numeric ID of the entry that was updated
+ *
+ * @return void
+ */
+function gravityview_set_entry_to_unread_after_edit( $form, $entry_id ) {
 
-	public static $ID = __ID__;
+	$updated = RGFormsModel::update_lead_property( $entry_id, 'is_read', 0 );
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
+	if( false !== $updated ) {
+		do_action( 'gravityview_log_debug', sprintf( '%s: Marked Entry ID #%d unread', __FUNCTION__, $entry_id ) );
+	} else {
+		do_action( 'gravityview_log_error', sprintf( '%s: Failed to marked Entry ID #%d unread', __FUNCTION__, $entry_id ) );
 	}
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_action( 'gravityview/edit_entry/after_update', 'gravityview_set_entry_to_unread_after_edit', 10, 2 );

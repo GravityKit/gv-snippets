@@ -1,3 +1,9 @@
+### GravityView Mod: Mark Entry Unread After Edit
+
+This snippet marks an entry as unread after it has been edited in GravityView.
+
+-------
+
 # Plugins Index
 Not all the plugins are displayed here, because some of them are specific to a customer.
 
