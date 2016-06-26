@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: Redirect the Edit Entry Go Back link to the multiple entries view
+ * Plugin Name:       GravityView Mod: Redirect to Multiple Entries After Edit Entry
  * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/5101-redirect-edit-to-multiple-entries
- * Description:       Redirects the Edit Entry Go Back and cancel link to the multiple entries view
- * Version:           1.0
+ * Description:       Redirects the "Go back" and "Cancel" links to the multiple entries screen instead of the single entry screen
+ * Version:           1.0.1
  * Author:            GravityView
  * Author URI:        https://gravityview.co
  * License:           GPL-2.0+
@@ -43,7 +43,7 @@ class GV_Snippet_5101 {
 	 * @param $back_link string Url to return to the original entry
 	 */
 	function gv_my_update_message( $message, $view_id, $entry, $back_link ) {
-		$link = str_replace( 'entry/'.$entry['id'].'/', '', $back_link );
+		$link = gv_directory_link();
 		return 'Entry Updated. <a href="'. esc_url($link) .'">Return to the list</a>';
 	}
 
@@ -55,7 +55,7 @@ class GV_Snippet_5101 {
 	 * since 1.11.1
 	 */
 	function gv_my_edit_cancel_link( $back_link, $form, $entry, $view_id ) {
-		return str_replace( 'entry/'.$entry['id'].'/', '', $back_link );
+		return gv_directory_link();
 	}
 
 
