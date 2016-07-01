@@ -14,7 +14,12 @@ Disable entry caching in GravityView
 - [Disable Field Conditional Logic on Edit](https://github.com/katzwebservices/gv-snippets/tree/2726-disable-conditional-logic)<br />
 Disable the Field Conditional Logic on the Edit Entry View (show all fields, regardless of the selected values)
 
-### For GravityView Extensions
+### For GravityView Extensions & Premium Plugins
 
 - [Use DataTables "Compact" Style](https://github.com/katzwebservices/gv-snippets/tree/addon/2677-datatables-compact)<br />
 Use DataTables "Compact" style. [See example here](https://datatables.net/examples/styling/compact.html)
+
+### Modify Gravity Forms
+
+- [Add Missing Fields to Gravity Forms Export](https://github.com/gravityview/gv-snippets/tree/addon/6031-add-export-fields)<br />
+Gravity Forms doesn't include all the entry data in the the Entries export. This snipped adds the option to export these entry values: "Is Starred", "Is Read", "Entry Status", "Is Fulfilled", "Currency", "Transaction Type", "Payment Method"
