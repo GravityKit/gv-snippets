@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Disable User Registration Updates on Edit Entry
- * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/6065-disable-user-registration-update
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/6065-disable-user-registration-update
  * Description:       Prevent User details from being modified during Edit Entry.
  * Version:           1.0
  * Author:            GravityView
