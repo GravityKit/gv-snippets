@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Show Custom Content Before Search
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/6691-show-widget-before-search
+ * Description:       Show Custom Content widgets before a search is performed, regardless of the "Hide view data until search is performed" View setting
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,21 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * Show Custom Content widgets before a search is performed, regardless of the View settings
+ *
+ * @param bool $hide_until_searched Whether to hide the widget until search is performed
+ * @param GravityView_Widget $widget GravityView Widget object
+ *
+ * @return bool false: don't hide widget; true: hide widget
+ */
+function gravityview_show_custom_content_widget_before_search( $hide_until_searched = false, GravityView_Widget $widget ) {
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if( 'custom_content' === $widget->get_widget_id() ) {
+		$hide_until_searched = false;
 	}
 
-	public function __construct(){
-
-	}
+	return $hide_until_searched;
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_filter( 'gravityview/widget/hide_until_searched', 'gravityview_show_custom_content_widget_before_search', 10, 2 );
