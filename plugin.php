@@ -26,4 +26,5 @@ function gv_post_add_entry_approve_entry( $entry, $form ) {
 	gform_update_meta( $entry['id'], 'is_approved', 'Approved' );
 }
 
+add_action( 'gform_entry_created', 'gv_post_add_entry_approve_entry', 10, 2 );
 add_action( 'gform_post_add_entry', 'gv_post_add_entry_approve_entry', 10, 2 );
