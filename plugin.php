@@ -3,7 +3,7 @@
  * Plugin Name:       GravityView Mod: Approve Entries by Default
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/4575-approve-by-default
  * Description:       When new entries are created in Gravity Forms, add entry approval status. Requires Gravity Forms 1.9.14.26 or newer.
- * Version:           1.0
+ * Version:           1.0.1
  * Author:            GravityView
  * Author URI:        https://gravityview.co
  * License:           GPL-2.0+
