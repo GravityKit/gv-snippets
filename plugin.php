@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ){
  */
 function gv_post_add_entry_approve_entry( $entry, $form ) {
 	
-	$approved_status = 'Approved';
+	$approved_status = 1;
 	
 	if( class_exists('GravityView_Entry_Approval_Status') ) {
 		$approved_status = GravityView_Entry_Approval_Status::APPROVED;
