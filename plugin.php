@@ -23,7 +23,14 @@ if ( ! defined( 'WPINC' ) ){
  * @return void
  */
 function gv_post_add_entry_approve_entry( $entry, $form ) {
-	gform_update_meta( $entry['id'], 'is_approved', 'Approved' );
+	
+	$approved_status = 'Approved';
+	
+	if( class_exists('GravityView_Entry_Approval_Status') ) {
+		$approved_status = GravityView_Entry_Approval_Status::APPROVED;
+	}
+	
+	gform_update_meta( $entry['id'], 'is_approved', $approved_status );
 }
 
 add_action( 'gform_entry_created', 'gv_post_add_entry_approve_entry', 10, 2 );
