@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
+ * Plugin Name:       GravityView Mod: Disable Checking Content-Length in DataTables
  * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Description:       When inaccurate content length is calculated due to plugin or theme conflicts, this disables the GravityView check.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,8 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
-
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
-}
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+/**
+ * Disable the Content-Length header on the AJAX JSON response
+ * @param boolean $has_content_length true by default
+ */
+add_filter( 'gravityview/datatables/json/header/content_length', '__return_false' );
