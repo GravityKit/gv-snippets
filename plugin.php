@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Disable Checking Content-Length in DataTables
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/datatables-disable-content-length
  * Description:       When inaccurate content length is calculated due to plugin or theme conflicts, this disables the GravityView check.
  * Version:           1.0
  * Author:            GravityView
