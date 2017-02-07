@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Modify View Offsets
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/8037-view-offsets
+ * Description:       View #304 should only display the first 24 entries, View #866 and #869 should only display the second 24 entries
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,47 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * View 304 should only get the first 24 entries
+ */
+add_filter( 'gravityview_get_entries_304', 'ontwerpkliniek_get_first_24_entries' );
 
-	public static $ID = __ID__;
+/**
+ * @param array $parameters Array with `search_criteria`, `sorting` and `paging` keys.
+ * @param array $args View configuration args.
+ * @param int $form_id Gravity Forms form ID
+ *
+ * @return array
+ */
+function ontwerpkliniek_get_first_24_entries( $parameters = array(), $args = array(), $form_id = 0 ) {
 
-	private static $_instance = null;
+	// Always force page 1
+	$parameters['pagenum'] = 1;
+	$parameters['offset'] = 0;
+	$parameters['page_size'] = 24;
 
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function __construct(){
-
-	}
+	return $parameters;
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+/**
+ * View 866 and 869 should only get the second 24 entries
+ */
+add_filter( 'gravityview_get_entries_866', 'ontwerpkliniek_get_second_24_entries' );
+add_filter( 'gravityview_get_entries_869', 'ontwerpkliniek_get_second_24_entries' );
+
+/**
+ * @param array $parameters Array with `search_criteria`, `sorting` and `paging` keys.
+ * @param array $args View configuration args.
+ * @param int $form_id Gravity Forms form ID
+ *
+ * @return array
+ */
+function ontwerpkliniek_get_second_24_entries( $parameters = array(), $args = array(), $form_id = 0 ) {
+
+	// Always force page 1
+	$parameters['pagenum'] = 1;
+	$parameters['offset'] = 24;
+	$parameters['page_size'] = 24;
+
+	return $parameters;
+}
