@@ -43,5 +43,5 @@ function gravityview_edit_entry_process_feeds( $form = array(), $entry_id = 0, $
 	$entry = GFAPI::get_entry( $entry_id );
 
 	/** @see GFFeedAddOn::maybe_process_feed */
-	do_action( 'gform_entry_post_save', $entry, $form );
+	apply_filters( 'gform_entry_post_save', $entry, $form );
 }
