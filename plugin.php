@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Edit Entry Process Feeds
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/edit-entry-process-feeds
+ * Description:       Process feeds after an entry has been updated using GravityView's Edit Entry
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,33 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_action( 'gravityview/edit_entry/after_update', 'gravityview_edit_entry_process_feeds', 10, 4 );
 
-	public static $ID = __ID__;
+/**
+ * Process feeds after an entry has been updated using GravityView Edit Entry
+ *
+ * @see GFFeedAddOn::maybe_process_feed Triggers feed addons
+ *
+ * @param array $form Gravity Forms form array
+ * @param string $entry_id Numeric ID of the entry that was updated
+ * @param GravityView_Edit_Entry_Render $this This object
+ *
+ * @return void
+ */
+function gravityview_edit_entry_process_feeds( $form = array(), $entry_id = 0, $object = null ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if ( empty( $form ) ) {
+		do_action( 'gravityview_log_error', __FUNCTION__ . ': Form does not exist; gform_entry_post_save not triggered.' );
+		return;
 	}
 
-	public function __construct(){
-
+	if ( empty( $entry_id ) || ! is_numeric( $entry_id ) ) {
+		do_action( 'gravityview_log_error', __FUNCTION__ . ': Entry ID does not exist; gform_entry_post_save not triggered.' );
+		return;
 	}
+
+	$entry = GFAPI::get_entry( $entry_id );
+
+	/** @see GFFeedAddOn::maybe_process_feed */
+	do_action( 'gform_entry_post_save', $entry, $form );
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
