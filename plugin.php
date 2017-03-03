@@ -15,7 +15,7 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-add_action( 'gravityview/edit_entry/after_update', 'gravityview_edit_entry_process_feeds', 10, 4 );
+add_action( 'gravityview/edit_entry/after_update', 'gravityview_edit_entry_process_feeds', 10, 3 );
 
 /**
  * Process feeds after an entry has been updated using GravityView Edit Entry
