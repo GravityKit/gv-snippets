@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Bypass Delete Entry Visibility Check
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/11148-error-deleting-entry
+ * Description:       When deleting an entry, don't check entry visibility. GravityView will still verify the current user has the correct permissions.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,30 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+/**
+ * When deleting an entry, don't consider whether the entry is visible
+ *
+ * The code already checks whether or not the user has the correct permissions, so this extra security isn't
+ * strictly necessary. If it causes a problem, it is safe to disable.
+ *
+ * @param bool $check_entry_display Whether to check entry visibility before gravityview_get_entry() returns an entry
+ *
+ * @return bool true: Make sure the entry is visible to the current user using the slug/id; false: don't check
+ */
+function _gravityview_dont_check_entry_display_when_deleting_entry( $check_entry_display = true ) {
 
-	public static $ID = __ID__;
-
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if ( empty( $_GET['delete'] ) || empty( $_GET['entry_id'] ) ) {
+		return $check_entry_display;
 	}
 
-	public function __construct(){
+	// Make sure it's a GravityView request
+	$valid_nonce_key = wp_verify_nonce( $_GET['delete'], sprintf( 'delete_%s', $_GET['entry_id'] ) );
 
+	if( ! $valid_nonce_key ) {
+		return $check_entry_display;
 	}
+
+	return false;
 }
 
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
+add_filter( 'gravityview/common/get_entry/check_entry_display', '_gravityview_dont_check_entry_display_when_deleting_entry' );
