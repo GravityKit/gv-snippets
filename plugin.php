@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Hide Maps Entries Until Search
+ * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/12355-hide-maps-entries
+ * Description:       Hide GravityView Maps entries until search—without hiding the markers
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,23 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_action('gravityview_map_body_before', 'gv_hide_entries_before_search');
 
-	public static $ID = __ID__;
+/**
+ * Hide entries list on a Map View until a search is performed
+ *
+ * @return void
+ */
+function gv_hide_entries_before_search() {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if( GravityView_frontend::getInstance()->is_searching() ) {
+		return;
 	}
 
-	public function __construct(){
-
+	?>
+<style type="text/css">
+	.gv-map-container .gv-map-entries {
+		display: none;
 	}
+</style>
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
