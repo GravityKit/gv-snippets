@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       GravityView Mod: Hide Maps Entries Until Search
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/addon/12355-hide-maps-entries
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/12355-hide-maps-entries
  * Description:       Hide GravityView Maps entries until search—without hiding the markers
  * Version:           1.0
  * Author:            GravityView
