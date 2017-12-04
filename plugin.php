@@ -34,4 +34,5 @@ function gv_hide_entries_before_search() {
 		display: none;
 	}
 </style>
+<?php
 }
