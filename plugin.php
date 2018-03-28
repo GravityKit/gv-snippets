@@ -56,7 +56,13 @@ class GV_Snippet_2548 {
 			return $criteria;
 		}
 
-		$criteria['search_criteria']['field_filters'][] = array( 'key' => '16', 'value' => $entry['7'] );
+		$criteria['search_criteria']['field_filters']['mode'] = 'all';
+		
+		$criteria['search_criteria']['field_filters'][] = array( 
+			'key' => '16', 
+			'value' => $entry['7'],
+			'operator' => 'is'
+		);
 
 		// change the order of the entries
 		$criteria['sorting'] = array('key' => '16', 'direction' => 'asc' );
