@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: __description__
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/__ID__
- * Description:       __description__
+ * Plugin Name:       GravityView Mod: Update Entry Status After Payment
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/addon/14028-entry-status
+ * Description:       After a payment is completed, approve the entry. If failed or refunded, disapprove.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,23 +15,39 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-class GV_Snippet___ID__ {
+add_action('gform_post_payment_completed', 'gv_approve_entry_post_payment_completed', 10, 2 );
 
-	public static $ID = __ID__;
+/**
+ * After a payment is completed, approve the entry. If failed or refunded, disapprove.
+ *
+ * @param array $entry
+ * @param array $action {
+ *   @type bool   $is_fulfilled
+ *   @type int    $transaction_id
+ *   @type string $transaction_type
+ *   @type string $payment_status
+ *   @type string $payment_amount
+ *   @type string $payment_date
+ *   @type string $payment_method
+ * }
+ *
+ * @return void
+ */
+function gv_approve_entry_post_payment_completed( $entry = array(), $action = array() ) {
 
-	private static $_instance = null;
-
-	public static function instance(){
-		if ( ! ( self::$_instance instanceof self ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	if ( empty( $action['payment_status'] ) || ! class_exists( 'GravityView_Entry_Approval' ) ) {
+		return;
 	}
 
-	public function __construct(){
+	$approved_column_id = GravityView_Entry_Approval::get_approved_column( $entry['form_id'] );
 
+	switch( $action['payment_status'] ) {
+		case 'Active': // Subscription
+		case 'Paid': // Single
+			GravityView_Entry_Approval::update_approved( $entry['id'], GravityView_Entry_Approval_Status::APPROVED, $entry['form_id'], $approved_column_id );
+			break;
+		default: // Failed, voided, refunded, etc.
+			GravityView_Entry_Approval::update_approved( $entry['id'], GravityView_Entry_Approval_Status::DISAPPROVED, $entry['form_id'], $approved_column_id );
+			break;
 	}
 }
-
-add_action( 'plugins_loaded', array( 'GV_Snippet___ID__', 'instance' ), 15 );
