@@ -22,4 +22,4 @@ Use DataTables "Compact" style. [See example here](https://datatables.net/exampl
 ### Modify Gravity Forms
 
 - [Add Missing Fields to Gravity Forms Export](https://github.com/gravityview/gv-snippets/tree/addon/6031-add-export-fields)<br />
-Gravity Forms doesn't include all the entry data in the the Entries export. This snipped adds the option to export these entry values: "Is Starred", "Is Read", "Entry Status", "Is Fulfilled", "Currency", "Transaction Type", "Payment Method"
+Gravity Forms doesn't include all the entry data in the Entries export. This snipped adds the option to export these entry values: "Is Starred", "Is Read", "Entry Status", "Is Fulfilled", "Currency", "Transaction Type", "Payment Method"
