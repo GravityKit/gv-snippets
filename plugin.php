@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       GravityView Mod: Disable Caching
- * Plugin URI:        https://github.com/katzwebservices/gv-snippets/tree/2863-disable-cache
- * Description:       Disable entry caching in GravityView
+ * Plugin Name:       GravityView Mod: Force Enable Caching
+ * Plugin URI:        https://github.com/gravityview/gv-snippets/tree/16590-enable-cache
+ * Description:       By default, caching is disabled when <code>WP_DEBUG</code> is set. Override this to enable caching in GravityView.
  * Version:           1.0
  * Author:            GravityView
  * Author URI:        https://gravityview.co
@@ -15,4 +15,4 @@ if ( ! defined( 'WPINC' ) ){
 	die;
 }
 
-add_filter( 'gravityview_use_cache', '__return_false' );
+add_filter( 'gravityview_use_cache', '__return_true' );
