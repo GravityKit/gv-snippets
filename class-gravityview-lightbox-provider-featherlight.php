@@ -92,7 +92,7 @@ class GravityView_Lightbox_Provider_Featherlight extends GravityView_Lightbox_Pr
 	/**
 	 * @inheritDoc
 	 */
-	public function fileupload_link_atts( $link_atts, $field_compat = array(), $context = null ) {
+	public function fileupload_link_atts( $link_atts, $field_compat = array(), $context = null, $additional_details = null ) {
 
 		if ( ! $context->view->settings->get( 'lightbox', false ) ) {
 			return $link_atts;
