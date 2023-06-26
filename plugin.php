@@ -27,7 +27,7 @@ class GV_Snippet_2643 {
 	 * @link http://docs.gravityview.co/article/55-how-do-i-modify-the-search-mode
 	 * @param string $mode 'any' or 'all'
 	 */
-	function gv_my_modify_search_mode ( $mode ) {
+	public static function gv_my_modify_search_mode ( $mode ) {
 		return 'all'; // by default is 'any'
 	}
 
